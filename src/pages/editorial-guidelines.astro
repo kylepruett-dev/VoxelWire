@@ -1,0 +1,139 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Editorial Guidelines — VoxelWire" 
+  description="Our code of ethics, review score methodology, transparency commitments, and editorial standards at VoxelWire Media."
+>
+  <Header />
+
+  <main class="flex-1 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <!-- Hero Banner -->
+    <div class="text-center space-y-4 mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/70 text-[#C084FC] border border-[#A855F7]/40 text-xs font-mono font-semibold uppercase tracking-widest shadow-[0_0_12px_rgba(168,85,247,0.25)]">
+        <span class="w-2 h-2 rounded-full bg-[#A855F7]"></span>
+        Code of Ethics & Standards
+      </div>
+      
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white font-heading tracking-tight leading-tight">
+        VoxelWire Editorial Guidelines
+      </h1>
+
+      <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+        Our reputation rests entirely on our editorial integrity. We hold ourselves to uncompromising standards of honesty, independence, and technical rigor across every review and news brief we publish.
+      </p>
+    </div>
+
+    <!-- Core Ethical Principles -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+      <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-6 space-y-3 relative overflow-hidden group hover:border-[#A855F7]/50 transition-all duration-300">
+        <div class="w-10 h-10 rounded-xl bg-purple-950/80 border border-[#A855F7]/40 flex items-center justify-center text-[#A855F7]">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-white font-heading">1. Uncompromised Independence</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Review scores and news coverage are never for sale. Advertising deals, publisher partnerships, or free review code never dictate our editorial verdicts or coverage priority.
+        </p>
+      </div>
+
+      <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-6 space-y-3 relative overflow-hidden group hover:border-[#A855F7]/50 transition-all duration-300">
+        <div class="w-10 h-10 rounded-xl bg-purple-950/80 border border-[#A855F7]/40 flex items-center justify-center text-[#A855F7]">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-white font-heading">2. Human-Written Content Guarantee</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Every word published on VoxelWire is researched, written, and verified by actual human editors. Generative AI tools are strictly prohibited from writing or auto-generating articles.
+        </p>
+      </div>
+
+      <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-6 space-y-3 relative overflow-hidden group hover:border-[#A855F7]/50 transition-all duration-300">
+        <div class="w-10 h-10 rounded-xl bg-purple-950/80 border border-[#A855F7]/40 flex items-center justify-center text-[#A855F7]">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-white font-heading">3. Sourcing & Attribution</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          We respect original reporting. When breaking news originates from another outlet, leak, or developer community post, we explicitly credit and link directly to the primary source.
+        </p>
+      </div>
+
+      <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-6 space-y-3 relative overflow-hidden group hover:border-[#A855F7]/50 transition-all duration-300">
+        <div class="w-10 h-10 rounded-xl bg-purple-950/80 border border-[#A855F7]/40 flex items-center justify-center text-[#A855F7]">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-white font-heading">4. Rapid Corrections Policy</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          If a factual error occurs, we fix it immediately and transparently. Substantive updates include a clear editor's note detailing what was modified and when.
+        </p>
+      </div>
+    </div>
+
+    <!-- Review Scoring System Breakdown -->
+    <div class="bg-slate-900/40 rounded-3xl border border-slate-800 p-8 sm:p-10 mb-16 space-y-8">
+      <div>
+        <span class="text-xs font-mono uppercase tracking-widest text-[#A855F7]">Evaluation Framework</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-heading mt-1">Our Review Scoring Scale</h2>
+        <p class="text-slate-400 text-sm mt-2">
+          VoxelWire uses a 1.0 to 10.0 score scale evaluating gameplay depth, technical performance, narrative execution, and overall value.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+          <span class="inline-block px-2.5 py-1 rounded bg-[#A855F7] text-white text-sm font-black font-mono shadow-[0_0_10px_#A855F7]">9.0 - 10.0</span>
+          <h4 class="text-base font-bold text-white font-heading">Masterpiece</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">An essential genre pinnacle that sets new industry benchmarks for design or tech.</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+          <span class="inline-block px-2.5 py-1 rounded bg-purple-900/80 text-purple-200 text-sm font-black font-mono border border-[#A855F7]/40">7.5 - 8.9</span>
+          <h4 class="text-base font-bold text-white font-heading">Great</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">Highly recommended with stellar mechanics, minor technical or pacing flaws.</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+          <span class="inline-block px-2.5 py-1 rounded bg-slate-800 text-slate-200 text-sm font-black font-mono">5.0 - 7.4</span>
+          <h4 class="text-base font-bold text-white font-heading">Average</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">Has solid ideas or visuals, but held back by repetitive loops or performance issues.</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+          <span class="inline-block px-2.5 py-1 rounded bg-red-950 text-red-300 text-sm font-black font-mono border border-red-800/40">1.0 - 4.9</span>
+          <h4 class="text-base font-bold text-white font-heading">Flawed</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">Severely broken, unoptimized, or fundamentally lacking core gameplay value.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sign-off Note -->
+    <div class="p-8 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <img
+          src="/images/ethan-clarke.jpg"
+          alt="Ethan Clarke"
+          class="w-14 h-14 rounded-full object-cover ring-2 ring-[#A855F7]/50"
+        />
+        <div>
+          <div class="text-base font-bold text-white">Ethan Clarke</div>
+          <div class="text-xs text-[#A855F7] font-mono">Editor-in-Chief • VoxelWire Media</div>
+        </div>
+      </div>
+
+      <p class="text-xs text-slate-400 max-w-md text-center sm:text-right italic leading-relaxed">
+        "Our readers trust us to give them the honest facts. That trust is our most valuable asset, and we protect it every single day."
+      </p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

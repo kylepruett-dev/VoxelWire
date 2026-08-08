@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="About Us — VoxelWire Media" 
+  description="Learn about VoxelWire, a small independent team of passionate gamers and tech writers delivering raw, unfiltered gaming news and technical reviews."
+>
+  <Header />
+
+  <main class="flex-1 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <!-- Hero Banner -->
+    <div class="text-center space-y-4 mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/70 text-[#C084FC] border border-[#A855F7]/40 text-xs font-mono font-semibold uppercase tracking-widest shadow-[0_0_12px_rgba(168,85,247,0.25)]">
+        <span class="w-2 h-2 rounded-full bg-[#A855F7] animate-pulse"></span>
+        Independent Gaming Journalism
+      </div>
+      
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white font-heading tracking-tight leading-tight">
+        Built by Gamers, <br class="hidden sm:inline" /> Driven by Passion.
+      </h1>
+
+      <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+        VoxelWire is an independent digital media outlet founded by a tight-knit squad of hardcore gamers, hardware enthusiasts, and industry analysts. We cut through corporate PR noise to bring you honest reviews and instant wire briefs.
+      </p>
+    </div>
+
+    <!-- Core Pillars Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+      <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-6 space-y-3 relative overflow-hidden group hover:border-[#A855F7]/50 transition-all duration-300">
+        <div class="w-12 h-12 rounded-xl bg-purple-950/80 border border-[#A855F7]/40 flex items-center justify-center text-[#A855F7] shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-white font-heading">Real-Time Speed</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          From surprise patch drops to breaking hardware leaks, our small team reacts instantaneously to deliver high-signal wire briefs as events unfold.
+        </p>
+      </div>
+
+      <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-6 space-y-3 relative overflow-hidden group hover:border-[#A855F7]/50 transition-all duration-300">
+        <div class="w-12 h-12 rounded-xl bg-purple-950/80 border border-[#A855F7]/40 flex items-center justify-center text-[#A855F7] shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-white font-heading">Uncompromised Truth</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          We don't pull punches for publisher access or review score favors. If a game is unoptimized or full of predatory microtransactions, we say it clearly.
+        </p>
+      </div>
+
+      <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-6 space-y-3 relative overflow-hidden group hover:border-[#A855F7]/50 transition-all duration-300">
+        <div class="w-12 h-12 rounded-xl bg-purple-950/80 border border-[#A855F7]/40 flex items-center justify-center text-[#A855F7] shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-white font-heading">Deep Tech Focus</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          We go beyond surface-level chatter—dissecting GPU architectures, game engine physics, frame time consistency, and display panel technologies.
+        </p>
+      </div>
+    </div>
+
+    <!-- Editorial Leadership Section -->
+    <div class="bg-slate-900/40 rounded-3xl border border-slate-800/90 p-8 sm:p-10 mb-20 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-[#A855F7]/5 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="text-center sm:text-left mb-8">
+        <span class="text-xs font-mono uppercase tracking-widest text-[#A855F7]">Editorial Leadership</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-heading mt-1">Meet Our Editor</h2>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-8">
+        <div class="relative shrink-0">
+          <img
+            src="/images/ethan-clarke.jpg"
+            alt="Ethan Clarke"
+            class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl object-cover ring-4 ring-[#A855F7]/30 shadow-2xl"
+          />
+          <span class="absolute -bottom-2 -right-2 bg-[#A855F7] text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md shadow-md">
+            Editor
+          </span>
+        </div>
+
+        <div class="space-y-3 text-center sm:text-left flex-1">
+          <div>
+            <h3 class="text-2xl font-bold text-white font-heading">Ethan Clarke</h3>
+            <p class="text-sm font-semibold text-[#A855F7]">Editor-in-Chief & Lead Reviewer</p>
+          </div>
+
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Ethan has spent over a decade covering competitive gaming, game engine advancements, and hardware benchmarks. As Editor-in-Chief at VoxelWire, he oversees editorial standards, article publishing, and deep-dive technical reviews.
+          </p>
+
+          <div class="pt-2 flex items-center justify-center sm:justify-start gap-3 text-xs text-slate-400 font-mono">
+            <span class="bg-slate-900 px-3 py-1 rounded-full border border-slate-800">🎮 PC & Console Enthusiast</span>
+            <span class="bg-slate-900 px-3 py-1 rounded-full border border-slate-800">⚡ Hardware Analyst</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Banner -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-8 rounded-2xl bg-slate-950/80 border border-slate-800 text-center">
+      <div class="space-y-1">
+        <div class="text-3xl font-black text-white font-heading">100%</div>
+        <div class="text-xs text-slate-400 font-mono uppercase tracking-wider">Independent</div>
+      </div>
+      <div class="space-y-1">
+        <div class="text-3xl font-black text-[#A855F7] font-heading">24/7</div>
+        <div class="text-xs text-slate-400 font-mono uppercase tracking-wider">Wire Coverage</div>
+      </div>
+      <div class="space-y-1">
+        <div class="text-3xl font-black text-white font-heading">0%</div>
+        <div class="text-xs text-slate-400 font-mono uppercase tracking-wider">Corporate Fluff</div>
+      </div>
+      <div class="space-y-1">
+        <div class="text-3xl font-black text-[#A855F7] font-heading">1M+</div>
+        <div class="text-xs text-slate-400 font-mono uppercase tracking-wider">Monthly Readers</div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

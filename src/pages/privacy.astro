@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Privacy Policy — VoxelWire" 
+  description="VoxelWire Privacy Policy outlining how we collect, protect, and respect your personal data."
+>
+  <Header />
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <header class="mb-10 pb-6 border-b border-slate-800">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/70 text-[#C084FC] border border-[#A855F7]/40 text-xs font-mono font-semibold uppercase tracking-widest mb-3">
+        Legal Document
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white font-heading">
+        Privacy Policy
+      </h1>
+      <p class="text-slate-400 text-sm mt-2 font-mono">Last Updated: August 7, 2026</p>
+    </header>
+
+    <article class="prose prose-invert prose-purple max-w-none space-y-8 text-slate-300 text-sm sm:text-base leading-relaxed">
+      <section class="space-y-3 bg-slate-900/40 p-6 rounded-2xl border border-slate-800">
+        <h2 class="text-xl font-bold text-white font-heading">1. Information We Collect</h2>
+        <p>
+          At VoxelWire Media Network Inc. ("VoxelWire", "we", "us"), we prioritize reader privacy. We collect minimal personal data necessary to provide a fast, secure news experience:
+        </p>
+        <ul class="list-disc pl-5 space-y-1 text-slate-400 text-sm">
+          <li><strong class="text-slate-200">Voluntary Information:</strong> Email addresses provided when subscribing to our newsletter.</li>
+          <li><strong class="text-slate-200">Technical Logs:</strong> Anonymized IP addresses, browser types, and device telemetry used solely for performance monitoring and DDoS prevention.</li>
+          <li><strong class="text-slate-200">Analytics Data:</strong> Anonymized page view statistics to determine popular articles and trending topics.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3 bg-slate-900/40 p-6 rounded-2xl border border-slate-800">
+        <h2 class="text-xl font-bold text-white font-heading">2. How We Use Your Data</h2>
+        <p>
+          We do not sell, rent, or trade your personal information to third parties or data brokers. Collected data is strictly used to:
+        </p>
+        <ul class="list-disc pl-5 space-y-1 text-slate-400 text-sm">
+          <li>Deliver newsletter updates you specifically opt into.</li>
+          <li>Optimize site performance, layout rendering speed, and server reliability.</li>
+          <li>Protect our network against automated spam and malicious traffic attacks.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3 bg-slate-900/40 p-6 rounded-2xl border border-slate-800">
+        <h2 class="text-xl font-bold text-white font-heading">3. Third-Party Services</h2>
+        <p>
+          We use trusted infrastructure providers for hosting and content distribution (e.g., CDN caching). These services process anonymized network requests on our behalf under strict data security standards.
+        </p>
+      </section>
+
+      <section class="space-y-3 bg-slate-900/40 p-6 rounded-2xl border border-slate-800">
+        <h2 class="text-xl font-bold text-white font-heading">4. Your Rights & Data Choices</h2>
+        <p>
+          Depending on your jurisdiction (including GDPR and CCPA rights), you have the right to request access to, correction of, or deletion of any personal data we hold about you. Newsletter subscribers can unsubscribe at any time using the link at the bottom of any email.
+        </p>
+      </section>
+
+      <section class="space-y-3 bg-slate-900/40 p-6 rounded-2xl border border-slate-800">
+        <h2 class="text-xl font-bold text-white font-heading">5. Contact Us</h2>
+        <p>
+          If you have questions regarding this Privacy Policy or wish to exercise your privacy rights, please contact our editorial team at <span class="text-[#A855F7] font-mono">privacy@voxelwire.com</span>.
+        </p>
+      </section>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>

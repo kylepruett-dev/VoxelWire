@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ArticleGrid from '../components/ArticleGrid.astro';
+import Footer from '../components/Footer.astro';
+import { getArticlesData } from '../utils/articles';
+
+const { featured, latest, grid } = await getArticlesData();
+---
+
+<Layout title="VoxelWire — Gaming & Tech News | High-Contrast Wire Briefs">
+  <Header activeCategory="All" />
+
+  <main class="flex-1">
+    <!-- Hero Section (2-Column Layout) -->
+    {featured && <HeroSection featured={featured} latest={latest} />}
+
+    <!-- Article Grid Section (3-Column Layout with Top Purple Borders & Upward Float Hover) -->
+    <ArticleGrid articles={grid} title="Trending Stories (Most Read)" />
+  </main>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,227 @@
+---
+import { getArticlesData } from '../utils/articles';
+
+interface Props {
+  activeCategory?: string;
+}
+
+const { activeCategory = 'All' } = Astro.props;
+const { all: searchIndex } = await getArticlesData();
+
+const navItems = [
+  { name: 'News', href: '/news' },
+  { name: 'Reviews', href: '/reviews' },
+];
+---
+
+<header class="sticky top-0 z-50 bg-[#090D16]/85 backdrop-blur-md border-b border-slate-800/80 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      
+      <!-- Brand Logo -->
+      <a href="/" class="group flex items-center gap-2.5 text-2xl font-bold tracking-tight text-white font-heading shrink-0">
+        <span class="relative flex h-3.5 w-3.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A855F7] opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#A855F7] shadow-[0_0_12px_#A855F7]"></span>
+        </span>
+        <span class="transition-colors duration-200 group-hover:text-white">
+          Voxel<span class="text-[#A855F7] group-hover:drop-shadow-[0_0_10px_rgba(168,85,247,0.8)]">Wire</span>
+        </span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+        {navItems.map((item) => {
+          const isActive = activeCategory.toLowerCase() === item.name.toLowerCase();
+          return (
+            <a
+              href={item.href}
+              class={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 relative ${
+                isActive 
+                  ? 'text-[#A855F7] bg-[#A855F7]/10 font-semibold' 
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
+              }`}
+            >
+              {item.name}
+              {isActive && (
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[#A855F7] rounded-full shadow-[0_0_8px_#A855F7]"></span>
+              )}
+            </a>
+          );
+        })}
+      </nav>
+
+      <!-- Right Search & Actions -->
+      <div class="hidden sm:flex items-center gap-4 relative">
+        <form id="desktop-search-form" class="relative" action="/search" method="GET">
+          <input
+            id="desktop-search-input"
+            name="q"
+            type="text"
+            autocomplete="off"
+            placeholder="Search news, reviews..."
+            class="w-48 lg:w-64 bg-slate-900/90 text-slate-200 placeholder-slate-400 text-sm rounded-full py-2 pl-9 pr-4 border border-slate-800 focus:outline-none focus:border-[#A855F7] focus:ring-1 focus:ring-[#A855F7] transition-all duration-200 shadow-inner"
+          />
+          <svg
+            class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+
+          <!-- Desktop Search Popup Dropdown -->
+          <div
+            id="desktop-search-dropdown"
+            class="hidden absolute right-0 top-12 w-80 lg:w-96 bg-slate-950/95 backdrop-blur-xl border border-slate-800 rounded-2xl p-3 shadow-2xl z-50 divide-y divide-slate-800/60 max-h-96 overflow-y-auto"
+          >
+          </div>
+        </form>
+
+        <button 
+          aria-label="Subscribe to Newsletter"
+          class="bg-[#A855F7] hover:bg-[#9333EA] text-white text-xs uppercase tracking-wider font-bold py-2 px-4 rounded-full transition-all duration-200 shadow-[0_0_15px_rgba(168,85,247,0.3)] hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] hover:scale-105 active:scale-95 shrink-0"
+        >
+          Subscribe
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="flex items-center md:hidden gap-2">
+        <button
+          id="mobile-menu-btn"
+          aria-label="Open Navigation Menu"
+          class="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800 focus:outline-none"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown -->
+  <div id="mobile-menu" class="hidden md:hidden border-b border-slate-800 bg-[#090D16]/95 px-4 pt-2 pb-6 space-y-3">
+    <div class="pt-2 relative">
+      <form id="mobile-search-form" action="/search" method="GET">
+        <input
+          id="mobile-search-input"
+          name="q"
+          type="text"
+          autocomplete="off"
+          placeholder="Search news, reviews..."
+          class="w-full bg-slate-900 text-slate-200 placeholder-slate-400 text-sm rounded-lg py-2.5 pl-9 pr-4 border border-slate-800 focus:outline-none focus:border-[#A855F7]"
+        />
+        <svg
+          class="w-4 h-4 text-slate-400 absolute left-3 top-6 -translate-y-1/2 pointer-events-none"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+
+        <div
+          id="mobile-search-dropdown"
+          class="hidden mt-2 bg-slate-950/95 border border-slate-800 rounded-xl p-3 divide-y divide-slate-800/60 max-h-80 overflow-y-auto"
+        >
+        </div>
+      </form>
+    </div>
+    <div class="flex flex-col space-y-1">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="text-slate-300 hover:text-[#A855F7] hover:bg-slate-800/60 px-3 py-2 rounded-md text-base font-medium"
+        >
+          {item.name}
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<!-- Pass search index to client -->
+<script define:vars={{ searchIndex }}>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+
+  // Client-side search handler
+  function setupSearch(inputId, dropdownId) {
+    const input = document.getElementById(inputId);
+    const dropdown = document.getElementById(dropdownId);
+    if (!input || !dropdown) return;
+
+    function renderResults(query) {
+      const trimmed = query.trim().toLowerCase();
+      if (!trimmed) {
+        dropdown.classList.add('hidden');
+        dropdown.innerHTML = '';
+        return;
+      }
+
+      const queryTerms = trimmed.split(/\s+/).filter(Boolean);
+
+      const filtered = searchIndex.filter(item => {
+        const title = (item.title || '').toLowerCase();
+        const excerpt = (item.excerpt || '').toLowerCase();
+        const category = (item.category || '').toLowerCase();
+        const tags = Array.isArray(item.tags) ? item.tags.join(' ').toLowerCase() : '';
+        return queryTerms.every(term => 
+          title.includes(term) || excerpt.includes(term) || category.includes(term) || tags.includes(term)
+        );
+      });
+
+      if (filtered.length === 0) {
+        dropdown.innerHTML = `<div class="p-3 text-xs text-slate-400 font-mono text-center">No articles found matching "${query}"</div>`;
+      } else {
+        dropdown.innerHTML = filtered.map(item => `
+          <a href="/article/${item.slug}" class="flex items-center gap-3 p-2.5 hover:bg-slate-900/80 rounded-xl transition-colors group">
+            <img src="${item.imageUrl}" alt="${item.title}" class="w-12 h-12 rounded-lg object-cover border border-slate-800 shrink-0" />
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-purple-950 text-[#C084FC] border border-[#A855F7]/30">${item.category}</span>
+                <span class="text-[10px] text-slate-400 font-mono">${item.publishedAt}</span>
+              </div>
+              <div class="text-xs font-semibold text-white group-hover:text-[#A855F7] transition-colors truncate mt-0.5">${item.title}</div>
+            </div>
+          </a>
+        `).join('');
+      }
+
+      dropdown.classList.remove('hidden');
+    }
+
+    input.addEventListener('input', (e) => {
+      renderResults(e.target.value);
+    });
+
+    input.addEventListener('focus', (e) => {
+      if (e.target.value.trim()) {
+        renderResults(e.target.value);
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.add('hidden');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        dropdown.classList.add('hidden');
+      }
+    });
+  }
+
+  setupSearch('desktop-search-input', 'desktop-search-dropdown');
+  setupSearch('mobile-search-input', 'mobile-search-dropdown');
+</script>
