@@ -38,16 +38,23 @@
       <div class="space-y-3">
         <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200 font-heading">Stay Wired</h4>
         <p class="text-xs text-slate-400">Get the daily briefing delivered directly to your inbox every morning.</p>
-        <div class="flex gap-2">
+        <form id="footer-subscribe-form" class="flex gap-2">
           <input
+            id="footer-email-input"
             type="email"
+            required
             placeholder="Enter your email"
             class="bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-[#A855F7] flex-1"
           />
-          <button class="bg-[#A855F7] hover:bg-[#9333EA] text-white text-xs font-bold px-3 py-2 rounded-lg transition-colors shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+          <button
+            id="footer-subscribe-btn"
+            type="submit"
+            class="bg-[#A855F7] hover:bg-[#9333EA] text-white text-xs font-bold px-3 py-2 rounded-lg transition-colors shadow-[0_0_10px_rgba(168,85,247,0.3)] disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
+          >
             Join
           </button>
-        </div>
+        </form>
+        <div id="footer-subscribe-message" class="hidden text-xs mt-2"></div>
       </div>
 
     </div>
@@ -65,3 +72,53 @@
     </div>
   </div>
 </footer>
+
+<script>
+  const footerForm = document.getElementById('footer-subscribe-form') as HTMLFormElement | null;
+  const footerEmailInput = document.getElementById('footer-email-input') as HTMLInputElement | null;
+  const footerBtn = document.getElementById('footer-subscribe-btn') as HTMLButtonElement | null;
+  const footerMsg = document.getElementById('footer-subscribe-message') as HTMLDivElement | null;
+
+  footerForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = footerEmailInput?.value?.trim();
+    if (!email || !footerBtn || !footerMsg) return;
+
+    footerBtn.disabled = true;
+    const origText = footerBtn.textContent;
+    footerBtn.textContent = '...';
+    footerMsg.classList.add('hidden');
+    footerMsg.className = 'hidden text-xs mt-2';
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        footerMsg.textContent = 'Thanks for joining VoxelWire!';
+        footerMsg.className = 'text-xs mt-2 p-2 rounded-lg bg-purple-950/80 text-[#C084FC] border border-[#A855F7]/30 font-semibold';
+        footerMsg.classList.remove('hidden');
+        footerBtn.textContent = 'Joined!';
+        footerBtn.disabled = true;
+        if (footerEmailInput) footerEmailInput.disabled = true;
+      } else {
+        footerMsg.textContent = data.error || 'Failed to subscribe. Please try again.';
+        footerMsg.className = 'text-xs mt-2 p-2 rounded-lg bg-red-950/80 text-red-300 border border-red-800/40 font-medium';
+        footerMsg.classList.remove('hidden');
+        footerBtn.disabled = false;
+        footerBtn.textContent = origText;
+      }
+    } catch (err) {
+      footerMsg.textContent = 'Network error. Please check your connection.';
+      footerMsg.className = 'text-xs mt-2 p-2 rounded-lg bg-red-950/80 text-red-300 border border-red-800/40 font-medium';
+      footerMsg.classList.remove('hidden');
+      footerBtn.disabled = false;
+      footerBtn.textContent = origText;
+    }
+  });
+</script>
+
