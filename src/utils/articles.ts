@@ -3,13 +3,21 @@ import type { Article } from '../data/articles';
 
 export function formatCollectionEntry(entry: CollectionEntry<'articles'>): Article {
   const { data, id } = entry;
+  const authorObj = typeof data.author === 'string'
+    ? { name: data.author, avatar: '/images/ethan-clarke.jpg', role: 'Editor' }
+    : {
+        name: data.author?.name || 'Ethan Clarke',
+        avatar: data.author?.avatar || '/images/ethan-clarke.jpg',
+        role: data.author?.role || 'Editor'
+      };
+
   return {
     id: id,
     title: data.title,
     slug: id,
     excerpt: data.description,
     category: data.category,
-    author: data.author,
+    author: authorObj,
     publishedAt: new Date(data.pubDate).toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
@@ -17,11 +25,11 @@ export function formatCollectionEntry(entry: CollectionEntry<'articles'>): Artic
     }),
     pubDateRaw: new Date(data.pubDate),
     readTime: data.readTime || '5 min read',
-    imageUrl: data.heroImage,
+    imageUrl: data.heroImage || data.image || 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&auto=format&fit=crop&q=80',
     featured: data.featured,
     score: data.score,
     reads: data.reads || 0,
-    tags: data.tags
+    tags: data.tags || []
   };
 }
 

@@ -8,21 +8,25 @@ const articles = defineCollection({
     description: z.string(),
     pubDate: z.coerce.date(),
     category: z.enum(['News', 'Reviews', 'Patch Notes', 'Guides']),
-    heroImage: z.string(),
+    heroImage: z.string().optional(),
+    image: z.string().optional(),
     tags: z.array(z.string()).default([]),
     featured: z.boolean().optional().default(false),
     readTime: z.string().optional().default('4 min read'),
     score: z.string().optional(),
+    verdictStatus: z.string().optional(),
+    verdictSummary: z.string().optional(),
+    pros: z.array(z.string()).optional(),
+    cons: z.array(z.string()).optional(),
     reads: z.number().optional().default(0),
-    author: z.object({
-      name: z.string().default('Ethan Clarke'),
-      avatar: z.string().default('/images/ethan-clarke.jpg'),
-      role: z.string().default('Editor')
-    }).optional().default({
-      name: 'Ethan Clarke',
-      avatar: '/images/ethan-clarke.jpg',
-      role: 'Editor'
-    })
+    author: z.union([
+      z.string(),
+      z.object({
+        name: z.string().default('Ethan Clarke'),
+        avatar: z.string().optional().default('/images/ethan-clarke.jpg'),
+        role: z.string().optional().default('Editor')
+      })
+    ]).optional().default('Ethan Clarke')
   }),
 });
 

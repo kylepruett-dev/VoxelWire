@@ -3,6 +3,8 @@ import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import ReviewVerdict from '../../components/ReviewVerdict.astro';
+import Comments from '../../components/Comments.astro';
 
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
@@ -13,89 +15,258 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
-const { title, description, pubDate, category, heroImage, tags, readTime, author, score } = entry.data;
+const { Content, headings } = await render(entry);
+const { 
+  title, 
+  description, 
+  pubDate, 
+  category, 
+  heroImage,
+  image, 
+  tags, 
+  readTime, 
+  author, 
+  score,
+  verdictStatus,
+  verdictSummary,
+  pros,
+  cons
+} = entry.data;
+
+const articleImage = heroImage || image || 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&auto=format&fit=crop&q=80';
+const authorObj = typeof author === 'string'
+  ? { name: author, avatar: '/images/ethan-clarke.jpg', role: 'Editor' }
+  : { name: author?.name || 'Ethan Clarke', avatar: author?.avatar || '/images/ethan-clarke.jpg', role: author?.role || 'Editor' };
 
 const formattedDate = new Date(pubDate).toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
   year: 'numeric'
 });
+
+// Calculate word count & estimated reading time dynamically
+const bodyText = entry.body || '';
+const wordCount = bodyText.trim().split(/\s+/).filter(Boolean).length;
+const calculatedReadTime = `${Math.max(1, Math.ceil(wordCount / 200))} MIN READ`;
+const displayReadTime = (readTime || calculatedReadTime).toUpperCase();
+
+// Filter Table of Contents headings (h2 and h3)
+const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
 ---
 
-<Layout title={`${title} — VoxelWire`} description={description}>
+<Layout 
+  title={`${title} — VoxelWire`} 
+  description={description}
+  image={articleImage}
+  articleDate={pubDate}
+  ogType="article"
+>
   <Header activeCategory={category} />
 
-  <main class="flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <!-- Back Link -->
-    <a href="/" class="inline-flex items-center gap-2 text-xs font-bold text-[#A855F7] hover:text-purple-300 transition-colors mb-6 uppercase tracking-wider">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-      </svg>
-      Back to VoxelWire
-    </a>
+  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+      
+      <!-- Main Content Column -->
+      <div class="lg:col-span-8 xl:col-span-8 flex flex-col min-w-0">
+        <!-- Back Link -->
+        <a href="/" class="inline-flex items-center gap-2 text-xs font-bold text-[#A855F7] hover:text-purple-300 transition-colors mb-6 uppercase tracking-wider">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Back to VoxelWire
+        </a>
 
-    <!-- Article Header -->
-    <header class="space-y-4 mb-8">
-      <div class="flex items-center gap-3 flex-wrap">
-        <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-md bg-purple-950/70 text-[#C084FC] border border-[#A855F7]/50 shadow-[0_0_10px_rgba(168,85,247,0.25)]">
-          {category}
-        </span>
-        {score && (
-          <span class="bg-[#A855F7] text-white text-xs font-black px-2.5 py-1 rounded-md shadow-[0_0_12px_#A855F7] font-mono">
-            SCORE: {score}
-          </span>
-        )}
-        <span class="text-xs text-slate-400 font-mono">{formattedDate} • {readTime || '5 min read'}</span>
-      </div>
-
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight font-heading">
-        {title}
-      </h1>
-
-      <p class="text-slate-300 text-lg sm:text-xl leading-relaxed font-normal border-l-2 border-[#A855F7] pl-4 italic">
-        {description}
-      </p>
-
-      <!-- Author Bar -->
-      <div class="pt-4 flex items-center justify-between border-t border-b border-slate-800 py-3">
-        <div class="flex items-center gap-3">
-          <img
-            src={author?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'}
-            alt={author?.name || 'Author'}
-            class="w-10 h-10 rounded-full object-cover ring-2 ring-[#A855F7]/40"
-          />
-          <div>
-            <div class="text-sm font-semibold text-white">{author?.name || 'VoxelWire Staff'}</div>
-            <div class="text-xs text-slate-400">{author?.role || 'Editorial Team'}</div>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-2">
-          {tags.map((tag: string) => (
-            <span class="text-xs font-mono bg-slate-900 border border-slate-800 text-slate-400 px-2.5 py-1 rounded-full">
-              #{tag}
+        <!-- Article Header -->
+        <header class="space-y-4 mb-8">
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-md bg-purple-950/70 text-[#C084FC] border border-[#A855F7]/50 shadow-[0_0_10px_rgba(168,85,247,0.25)]">
+              {category}
             </span>
-          ))}
+            {score && (
+              <span class="bg-[#A855F7] text-white text-xs font-black px-2.5 py-1 rounded-md shadow-[0_0_12px_#A855F7] font-mono">
+                SCORE: {score}
+              </span>
+            )}
+            <span class="text-xs text-slate-400 font-mono flex items-center gap-1.5">
+              <span>{formattedDate}</span>
+              <span>•</span>
+              <span class="text-[#A855F7] font-semibold">⏱️ {displayReadTime}</span>
+            </span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight font-heading">
+            {title}
+          </h1>
+
+          <p class="text-slate-300 text-lg sm:text-xl leading-relaxed font-normal border-l-2 border-[#A855F7] pl-4 italic">
+            {description}
+          </p>
+
+          <!-- Author Bar -->
+          <div class="pt-4 flex items-center justify-between border-t border-b border-slate-800 py-3 flex-wrap gap-4">
+            <div class="flex items-center gap-3">
+              <img
+                src={authorObj.avatar}
+                alt={authorObj.name}
+                class="w-10 h-10 rounded-full object-cover ring-2 ring-[#A855F7]/40"
+              />
+              <div>
+                <div class="text-sm font-semibold text-white">{authorObj.name}</div>
+                <div class="text-xs text-slate-400">{authorObj.role}</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 flex-wrap">
+              {(tags || []).map((tag: string) => (
+                <span class="text-xs font-mono bg-slate-900 border border-slate-800 text-slate-400 px-2.5 py-1 rounded-full">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </header>
+
+        <!-- Hero Image Banner -->
+        <div class="relative rounded-2xl overflow-hidden mb-8 border border-slate-800 shadow-2xl">
+          <img
+            src={articleImage}
+            alt={title}
+            class="w-full h-80 sm:h-[450px] object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#090D16] via-transparent to-transparent opacity-60"></div>
         </div>
+
+        <!-- Mobile Collapsible Table of Contents Dropdown -->
+        {tocHeadings.length > 0 && (
+          <details class="lg:hidden mb-8 bg-[#0B0E14] border border-slate-800 rounded-xl p-4 transition-all">
+            <summary class="cursor-pointer font-bold text-sm text-white flex items-center justify-between font-heading select-none">
+              <span class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#A855F7] shadow-[0_0_8px_#A855F7]"></span>
+                <span>Table of Contents</span>
+              </span>
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </summary>
+            <ul class="mt-3 pt-3 border-t border-slate-800/80 space-y-2 text-xs">
+              {tocHeadings.map((h) => (
+                <li class={h.depth === 3 ? "pl-4" : ""}>
+                  <a href={`#${h.slug}`} class="text-slate-300 hover:text-[#A855F7] transition-colors block py-0.5 font-medium">
+                    {h.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
+
+        <!-- Rendered Markdown Body -->
+        <article class="prose prose-invert prose-purple max-w-none space-y-6 text-slate-200 text-base leading-relaxed">
+          <Content />
+        </article>
+
+        <!-- Review Verdict Component -->
+        <ReviewVerdict 
+          score={score} 
+          verdictStatus={verdictStatus} 
+          verdictSummary={verdictSummary} 
+          pros={pros} 
+          cons={cons} 
+        />
+
+        <!-- Discussion & Giscus Comments Component -->
+        <Comments />
       </div>
-    </header>
 
-    <!-- Hero Image Banner -->
-    <div class="relative rounded-2xl overflow-hidden mb-10 border border-slate-800 shadow-2xl">
-      <img
-        src={heroImage}
-        alt={title}
-        class="w-full h-80 sm:h-[450px] object-cover"
-      />
-      <div class="absolute inset-0 bg-gradient-to-t from-[#090D16] via-transparent to-transparent opacity-60"></div>
+      <!-- Desktop Sticky Sidebar (Table of Contents + Author Briefing) -->
+      <aside class="lg:col-span-4 xl:col-span-4 hidden lg:block sticky top-28 space-y-6">
+        
+        <!-- Table of Contents Sidebar Card -->
+        {tocHeadings.length > 0 && (
+          <div class="bg-[#0B0E14] border border-slate-800/90 rounded-2xl p-5 shadow-xl space-y-4">
+            <div class="flex items-center gap-2 pb-3 border-b border-slate-800/80">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#A855F7] shadow-[0_0_10px_#A855F7]"></span>
+              <h3 class="text-xs font-bold font-heading uppercase tracking-widest text-white">
+                Table of Contents
+              </h3>
+            </div>
+
+            <nav class="space-y-1 max-h-[60vh] overflow-y-auto pr-1 no-scrollbar">
+              {tocHeadings.map((h) => (
+                <a
+                  href={`#${h.slug}`}
+                  data-depth={h.depth}
+                  class={`toc-link text-xs transition-all block py-1.5 px-3 rounded-lg border-l-2 border-transparent ${
+                    h.depth === 3 ? 'pl-6 text-slate-500 hover:text-[#A855F7]' : 'text-slate-400 hover:text-[#A855F7]'
+                  }`}
+                >
+                  {h.text}
+                </a>
+              ))}
+            </nav>
+          </div>
+        )}
+
+        <!-- Sidebar Author Briefing -->
+        <div class="bg-slate-900/40 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center gap-3">
+            <img
+              src={authorObj.avatar}
+              alt={authorObj.name}
+              class="w-10 h-10 rounded-full object-cover ring-2 ring-[#A855F7]/40"
+            />
+            <div>
+              <div class="text-sm font-semibold text-white">{authorObj.name}</div>
+              <div class="text-xs text-slate-400">{authorObj.role} • VoxelWire</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Covering hardware architecture, next-gen game engines, and competitive tactical shooters.
+          </p>
+        </div>
+
+      </aside>
+
     </div>
-
-    <!-- Rendered Markdown Body -->
-    <article class="prose prose-invert prose-purple max-w-none space-y-6 text-slate-200 text-base leading-relaxed">
-      <Content />
-    </article>
   </main>
 
   <Footer />
 </Layout>
+
+<script>
+  function setupTocHighlight() {
+    const links = document.querySelectorAll<HTMLAnchorElement>('.toc-link');
+    if (!links.length) return;
+
+    const headingElements = Array.from(
+      document.querySelectorAll<HTMLElement>('article h2[id], article h3[id]')
+    );
+
+    if (!headingElements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            links.forEach((link) => {
+              const href = link.getAttribute('href')?.replace('#', '');
+              if (href === id) {
+                link.classList.remove('text-slate-400', 'text-slate-500', 'border-transparent');
+                link.classList.add('text-[#A855F7]', 'font-bold', 'bg-[#A855F7]/10', 'border-[#A855F7]');
+              } else {
+                link.classList.remove('text-[#A855F7]', 'font-bold', 'bg-[#A855F7]/10', 'border-[#A855F7]');
+                link.classList.add(link.dataset.depth === '3' ? 'text-slate-500' : 'text-slate-400', 'border-transparent');
+              }
+            });
+          }
+        });
+      },
+      { rootMargin: '-80px 0px -60% 0px' }
+    );
+
+    headingElements.forEach((h) => observer.observe(h));
+  }
+
+  setupTocHighlight();
+</script>
