@@ -9,9 +9,8 @@ interface Props {
 
 const { articles, title = "Latest Wire Briefs" } = Astro.props;
 
-// Dynamically extract unique categories from provided articles
-const uniqueCategories = Array.from(new Set(articles.map(a => a.category)));
-const categories = ['All', ...uniqueCategories];
+// Standard category tabs
+const categories = ['All Posts', 'Reviews', 'News', 'Hardware', 'Guides'];
 ---
 
 <section id="latest" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
@@ -26,13 +25,13 @@ const categories = ['All', ...uniqueCategories];
     </div>
 
     <!-- Category Pills Filter -->
-    <div class="flex items-center gap-1.5 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+    <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
       {categories.map((category, idx) => (
         <button
           data-filter={category}
-          class={`filter-btn px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 whitespace-nowrap border ${
+          class={`filter-btn px-4 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-200 whitespace-nowrap border cursor-pointer ${
             idx === 0
-              ? 'bg-[#A855F7] text-white shadow-[0_0_15px_rgba(168,85,247,0.4)] border-[#A855F7]'
+              ? 'bg-[#A855F7] text-white shadow-lg shadow-purple-500/20 border-[#A855F7]'
               : 'bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 border-slate-800'
           }`}
         >
@@ -86,18 +85,18 @@ const categories = ['All', ...uniqueCategories];
 
         // Update button active states
         filterBtns.forEach(b => {
-          b.classList.remove('bg-[#A855F7]', 'text-white', 'shadow-[0_0_15px_rgba(168,85,247,0.4)]', 'border-[#A855F7]');
+          b.classList.remove('bg-[#A855F7]', 'text-white', 'shadow-lg', 'shadow-purple-500/20', 'border-[#A855F7]');
           b.classList.add('bg-slate-900', 'text-slate-400', 'hover:text-white', 'hover:bg-slate-800', 'border-slate-800');
         });
 
         btn.classList.remove('bg-slate-900', 'text-slate-400', 'hover:text-white', 'hover:bg-slate-800', 'border-slate-800');
-        btn.classList.add('bg-[#A855F7]', 'text-white', 'shadow-[0_0_15px_rgba(168,85,247,0.4)]', 'border-[#A855F7]');
+        btn.classList.add('bg-[#A855F7]', 'text-white', 'shadow-lg', 'shadow-purple-500/20', 'border-[#A855F7]');
 
         // Filter article grid items instantly
         let visibleCount = 0;
         items.forEach(item => {
           const itemCategory = item.getAttribute('data-category');
-          if (category === 'All' || itemCategory === category) {
+          if (category === 'All' || category === 'All Posts' || itemCategory === category) {
             item.style.display = 'block';
             visibleCount++;
           } else {
