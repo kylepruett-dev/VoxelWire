@@ -4,6 +4,7 @@ description: "A deep dive into Rockstar's engine innovations, world density, and
 pubDate: 2026-08-07T18:00:00Z
 category: "News"
 heroImage: "/images/gta6-hero.png"
+image: "/images/gta6-hero.png"
 score: "9.5"
 verdictStatus: "MUST WATCH"
 pros:

@@ -4,6 +4,7 @@ description: "With the Cost of Hope DLC dropping this month, we revisit GSC Game
 pubDate: 2026-08-06T12:00:00Z
 category: "Reviews"
 heroImage: "/images/stalker2-hero.png"
+image: "/images/stalker2-hero.png"
 score: "8.5"
 verdictStatus: "GREAT"
 pros:
