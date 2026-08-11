@@ -14,7 +14,7 @@ const { featured, latest } = Astro.props;
     
     <!-- Left Column: Featured Post (7 or 8 columns wide) -->
     <div class="lg:col-span-7 xl:col-span-8 flex flex-col">
-      <article class="group relative flex-1 flex flex-col bg-slate-900/50 rounded-2xl overflow-hidden border border-slate-800 hover:border-[#A855F7]/50 transition-all duration-300 shadow-xl hover:shadow-[0_0_30px_rgba(168,85,247,0.15)]">
+      <article class="group relative flex-1 flex flex-col bg-slate-900/50 rounded-2xl overflow-hidden border border-slate-800 hover:border-[#A855F7]/50 transition-all duration-300 shadow-xl hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] cursor-pointer">
         
         <!-- Large Thumbnail Container -->
         <div class="relative h-72 sm:h-96 w-full overflow-hidden bg-slate-950">
@@ -47,7 +47,7 @@ const { featured, latest } = Astro.props;
         <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-4">
           <div class="space-y-3">
             <h1 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight font-heading group-hover:text-[#A855F7] transition-colors duration-200">
-              <a href={`/article/${featured.slug}`}>
+              <a href={`/article/${featured.slug}`} class="after:absolute after:inset-0">
                 {featured.title}
               </a>
             </h1>
@@ -76,15 +76,12 @@ const { featured, latest } = Astro.props;
               </div>
             </div>
 
-            <a
-              href={`/article/${featured.slug}`}
-              class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-[#A855F7] hover:text-purple-300 transition-colors group/link"
-            >
+            <span class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-[#A855F7] group-hover:text-purple-300 transition-colors">
               Read Story
-              <svg class="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </svg>
-            </a>
+            </span>
           </div>
 
         </div>
@@ -108,10 +105,10 @@ const { featured, latest } = Astro.props;
         <!-- Stacked Items List -->
         <div class="divide-y divide-slate-800/60 flex-1 flex flex-col justify-around">
           {latest.map((item, index) => (
-            <article class="group py-3.5 first:pt-0 last:pb-0 transition-all duration-200">
+            <article class="group relative py-3.5 first:pt-0 last:pb-0 transition-all duration-200 cursor-pointer">
               <div class="flex items-center gap-3">
                 <!-- Thumbnail Image -->
-                <a href={`/article/${item.slug}`} class="relative shrink-0 w-20 h-16 rounded-lg overflow-hidden bg-slate-950 border border-slate-800/80 group-hover:border-[#A855F7]/60 transition-all shadow-md">
+                <div class="relative shrink-0 w-20 h-16 rounded-lg overflow-hidden bg-slate-950 border border-slate-800/80 group-hover:border-[#A855F7]/60 transition-all shadow-md">
                   <img
                     src={item.imageUrl}
                     alt={item.title}
@@ -119,7 +116,7 @@ const { featured, latest } = Astro.props;
                     loading="lazy"
                   />
                   <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent"></div>
-                </a>
+                </div>
 
                 <!-- Content -->
                 <div class="space-y-1 flex-1 min-w-0">
@@ -130,7 +127,7 @@ const { featured, latest } = Astro.props;
                     <span class="text-[11px] text-slate-400 font-mono">{item.publishedAt}</span>
                   </div>
                   <h3 class="text-sm font-semibold text-slate-200 group-hover:text-[#A855F7] transition-colors leading-snug line-clamp-2">
-                    <a href={`/article/${item.slug}`}>
+                    <a href={`/article/${item.slug}`} class="after:absolute after:inset-0">
                       {item.title}
                     </a>
                   </h3>

@@ -16,7 +16,7 @@ const categoryColors: Record<string, string> = {
 };
 ---
 
-<article class="group relative flex flex-col bg-slate-900/60 rounded-xl overflow-hidden border border-slate-800/90 border-t-2 border-t-[#A855F7] hover:border-t-[#C084FC] hover:border-slate-700 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_30px_rgba(168,85,247,0.2)]">
+<article class="group relative flex flex-col bg-slate-900/60 rounded-xl overflow-hidden border border-slate-800/90 border-t-2 border-t-[#A855F7] hover:border-t-[#C084FC] hover:border-slate-700 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_30px_rgba(168,85,247,0.2)] cursor-pointer">
   
   <!-- Thumbnail Image -->
   <div class="relative h-48 w-full overflow-hidden bg-slate-950">
@@ -56,7 +56,7 @@ const categoryColors: Record<string, string> = {
       </div>
 
       <h3 class="text-lg font-bold text-white group-hover:text-[#A855F7] transition-colors leading-snug font-heading">
-        <a href={`/article/${article.slug}`}>
+        <a href={`/article/${article.slug}`} class="after:absolute after:inset-0">
           {article.title}
         </a>
       </h3>
