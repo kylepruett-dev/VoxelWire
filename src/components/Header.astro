@@ -207,53 +207,79 @@ const navItems = [
   </div>
 </div>
 
-<!-- Pass search index to client -->
-<script define:vars={{ searchIndex }}>
-  const btn = document.getElementById('mobile-menu-btn');
+<!-- Pass search index to client via JSON script element -->
+<script id="search-data" type="application/json" set:html={JSON.stringify(searchIndex)} />
+
+<script>
+  import Fuse from 'fuse.js';
+
+  // Mobile menu handling
+  const menuBtn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
 
-  btn?.addEventListener('click', () => {
+  menuBtn?.addEventListener('click', () => {
     menu?.classList.toggle('hidden');
   });
 
-  // Client-side search handler
-  function setupSearch(inputId, dropdownId) {
-    const input = document.getElementById(inputId);
-    const dropdown = document.getElementById(dropdownId);
+  // Client-side search setup with Fuse.js
+  const searchDataEl = document.getElementById('search-data');
+  const articles = searchDataEl?.textContent ? JSON.parse(searchDataEl.textContent) : [];
+
+  const fuse = new Fuse(articles, {
+    keys: [
+      { name: 'title', weight: 0.4 },
+      { name: 'excerpt', weight: 0.2 },
+      { name: 'category', weight: 0.2 },
+      { name: 'tags', weight: 0.15 },
+      { name: 'slug', weight: 0.05 }
+    ],
+    threshold: 0.4,
+    ignoreLocation: true,
+    minMatchCharLength: 1
+  });
+
+  const categoryColors: Record<string, string> = {
+    News: 'bg-purple-950/80 text-purple-300 border-[#A855F7]/40',
+    Reviews: 'bg-purple-900/60 text-[#D8B4FE] border-[#A855F7]/50',
+    Guides: 'bg-purple-950/80 text-[#C084FC] border-[#A855F7]/40',
+    'Patch Notes': 'bg-purple-950/80 text-purple-200 border-[#A855F7]/40',
+    Hardware: 'bg-purple-950/80 text-[#C084FC] border-[#A855F7]/40',
+  };
+
+  function setupSearch(inputId: string, dropdownId: string) {
+    const input = document.getElementById(inputId) as HTMLInputElement | null;
+    const dropdown = document.getElementById(dropdownId) as HTMLElement | null;
     if (!input || !dropdown) return;
 
-    function renderResults(query) {
-      const trimmed = query.trim().toLowerCase();
+    function renderResults(query: string) {
+      const trimmed = query.trim();
       if (!trimmed) {
         dropdown.classList.add('hidden');
         dropdown.innerHTML = '';
         return;
       }
 
-      const queryTerms = trimmed.split(/\s+/).filter(Boolean);
+      const results = fuse.search(trimmed).map(res => res.item);
 
-      const filtered = searchIndex.filter(item => {
-        const title = (item.title || '').toLowerCase();
-        const excerpt = (item.excerpt || '').toLowerCase();
-        const category = (item.category || '').toLowerCase();
-        const tags = Array.isArray(item.tags) ? item.tags.join(' ').toLowerCase() : '';
-        return queryTerms.every(term => 
-          title.includes(term) || excerpt.includes(term) || category.includes(term) || tags.includes(term)
-        );
-      });
-
-      if (filtered.length === 0) {
-        dropdown.innerHTML = `<div class="p-3 text-xs text-slate-400 font-mono text-center">No articles found matching "${query}"</div>`;
+      if (results.length === 0) {
+        dropdown.innerHTML = `
+          <div class="p-4 text-xs text-slate-400 font-mono text-center space-y-1">
+            <p class="text-slate-300 font-medium">No results found for "${query}"</p>
+            <p class="text-[11px] text-slate-500">Try searching for news, reviews, or tags like #GTA6 or #STALKER2</p>
+          </div>
+        `;
       } else {
-        dropdown.innerHTML = filtered.map(item => `
-          <a href="/article/${item.slug}" class="flex items-center gap-3 p-2.5 hover:bg-slate-900/80 rounded-xl transition-colors group">
-            <img src="${item.imageUrl}" alt="${item.title}" class="w-12 h-12 rounded-lg object-cover border border-slate-800 shrink-0" />
-            <div class="min-w-0 flex-1">
+        dropdown.innerHTML = results.slice(0, 6).map(item => `
+          <a href="/article/${item.slug}" class="flex items-center gap-3 p-2.5 hover:bg-slate-900/90 rounded-xl transition-all duration-200 group border border-transparent hover:border-[#A855F7]/30">
+            <img src="${item.imageUrl}" alt="${item.title}" class="w-12 h-12 rounded-lg object-cover border border-slate-800 shrink-0 group-hover:border-[#A855F7]/50 transition-colors" />
+            <div class="min-w-0 flex-1 space-y-1">
               <div class="flex items-center gap-2">
-                <span class="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-purple-950 text-[#C084FC] border border-[#A855F7]/30">${item.category}</span>
-                <span class="text-[10px] text-slate-400 font-mono">${item.publishedAt}</span>
+                <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border backdrop-blur-md ${categoryColors[item.category] || 'bg-purple-950 text-[#C084FC] border-[#A855F7]/30'}">${item.category}</span>
+                <span class="text-[10px] text-slate-400 font-mono flex items-center gap-1">
+                  <span>⏱ ${item.readTime || '5 min read'}</span>
+                </span>
               </div>
-              <div class="text-xs font-semibold text-white group-hover:text-[#A855F7] transition-colors truncate mt-0.5">${item.title}</div>
+              <div class="text-xs font-semibold text-white group-hover:text-[#A855F7] transition-colors truncate">${item.title}</div>
             </div>
           </a>
         `).join('');
@@ -263,17 +289,17 @@ const navItems = [
     }
 
     input.addEventListener('input', (e) => {
-      renderResults(e.target.value);
+      renderResults((e.target as HTMLInputElement).value);
     });
 
     input.addEventListener('focus', (e) => {
-      if (e.target.value.trim()) {
-        renderResults(e.target.value);
+      if ((e.target as HTMLInputElement).value.trim()) {
+        renderResults((e.target as HTMLInputElement).value);
       }
     });
 
     document.addEventListener('click', (e) => {
-      if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+      if (!input.contains(e.target as Node) && !dropdown.contains(e.target as Node)) {
         dropdown.classList.add('hidden');
       }
     });
@@ -297,7 +323,7 @@ const navItems = [
   function openSubscribeModal() {
     modal?.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
-    const emailInput = document.getElementById('navbar-email-input');
+    const emailInput = document.getElementById('navbar-email-input') as HTMLInputElement | null;
     if (emailInput) emailInput.focus();
   }
 
@@ -327,8 +353,8 @@ const navItems = [
   });
 
   const navForm = document.getElementById('navbar-subscribe-form');
-  const navEmailInput = document.getElementById('navbar-email-input');
-  const navBtn = document.getElementById('navbar-subscribe-btn');
+  const navEmailInput = document.getElementById('navbar-email-input') as HTMLInputElement | null;
+  const navBtn = document.getElementById('navbar-subscribe-btn') as HTMLButtonElement | null;
   const navMsg = document.getElementById('navbar-subscribe-message');
 
   navForm?.addEventListener('submit', async (e) => {

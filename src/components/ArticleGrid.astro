@@ -8,6 +8,10 @@ interface Props {
 }
 
 const { articles, title = "Latest Wire Briefs" } = Astro.props;
+
+// Dynamically extract unique categories from provided articles
+const uniqueCategories = Array.from(new Set(articles.map(a => a.category)));
+const categories = ['All', ...uniqueCategories];
 ---
 
 <section id="latest" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
@@ -23,13 +27,13 @@ const { articles, title = "Latest Wire Briefs" } = Astro.props;
 
     <!-- Category Pills Filter -->
     <div class="flex items-center gap-1.5 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
-      {['All', 'News', 'Reviews'].map((category, idx) => (
+      {categories.map((category, idx) => (
         <button
           data-filter={category}
-          class={`filter-btn px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 whitespace-nowrap ${
+          class={`filter-btn px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 whitespace-nowrap border ${
             idx === 0
-              ? 'bg-[#A855F7] text-white shadow-[0_0_15px_rgba(168,85,247,0.4)]'
-              : 'bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800'
+              ? 'bg-[#A855F7] text-white shadow-[0_0_15px_rgba(168,85,247,0.4)] border-[#A855F7]'
+              : 'bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 border-slate-800'
           }`}
         >
           {category}
@@ -51,6 +55,11 @@ const { articles, title = "Latest Wire Briefs" } = Astro.props;
         <ArticleCard article={article} />
       </div>
     ))}
+
+    <div id="no-articles-message" class="hidden col-span-full text-center py-16 text-slate-400 font-mono text-sm bg-slate-900/40 rounded-2xl border border-slate-800/80">
+      <p class="text-slate-300 font-medium mb-1">No articles found in this category</p>
+      <p class="text-xs text-slate-500">Select another filter pill or view 'All' articles.</p>
+    </div>
   </div>
 
   <!-- Load More Action -->
@@ -66,32 +75,46 @@ const { articles, title = "Latest Wire Briefs" } = Astro.props;
 </section>
 
 <script>
-  // Simple interactive category filtering
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const items = document.querySelectorAll('.article-item');
+  function setupCategoryFilters() {
+    const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    const items = document.querySelectorAll<HTMLElement>('.article-item');
+    const noArticlesMsg = document.getElementById('no-articles-message');
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const category = btn.getAttribute('data-filter');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-filter');
 
-      // Update button active state
-      filterBtns.forEach(b => {
-        b.classList.remove('bg-[#A855F7]', 'text-white', 'shadow-[0_0_15px_rgba(168,85,247,0.4)]');
-        b.classList.add('bg-slate-900', 'text-slate-400', 'border', 'border-slate-800');
-      });
+        // Update button active states
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-[#A855F7]', 'text-white', 'shadow-[0_0_15px_rgba(168,85,247,0.4)]', 'border-[#A855F7]');
+          b.classList.add('bg-slate-900', 'text-slate-400', 'hover:text-white', 'hover:bg-slate-800', 'border-slate-800');
+        });
 
-      btn.classList.remove('bg-slate-900', 'text-slate-400', 'border', 'border-slate-800');
-      btn.classList.add('bg-[#A855F7]', 'text-white', 'shadow-[0_0_15px_rgba(168,85,247,0.4)]');
+        btn.classList.remove('bg-slate-900', 'text-slate-400', 'hover:text-white', 'hover:bg-slate-800', 'border-slate-800');
+        btn.classList.add('bg-[#A855F7]', 'text-white', 'shadow-[0_0_15px_rgba(168,85,247,0.4)]', 'border-[#A855F7]');
 
-      // Filter articles
-      items.forEach(item => {
-        const itemCategory = item.getAttribute('data-category');
-        if (category === 'All' || itemCategory === category) {
-          (item as HTMLElement).style.display = 'block';
-        } else {
-          (item as HTMLElement).style.display = 'none';
+        // Filter article grid items instantly
+        let visibleCount = 0;
+        items.forEach(item => {
+          const itemCategory = item.getAttribute('data-category');
+          if (category === 'All' || itemCategory === category) {
+            item.style.display = 'block';
+            visibleCount++;
+          } else {
+            item.style.display = 'none';
+          }
+        });
+
+        if (noArticlesMsg) {
+          if (visibleCount === 0) {
+            noArticlesMsg.classList.remove('hidden');
+          } else {
+            noArticlesMsg.classList.add('hidden');
+          }
         }
       });
     });
-  });
+  }
+
+  setupCategoryFilters();
 </script>
