@@ -58,6 +58,67 @@ const displayReadTime = (readTime || calculatedReadTime).toUpperCase();
 
 // Filter Table of Contents headings (h2 and h3)
 const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
+
+// Schema.org JSON-LD Structured Data Generation
+const siteOrigin = 'https://voxelwire.vercel.app';
+const articleUrl = `${siteOrigin}/article/${entry.id}`;
+const fullImageUrl = articleImage.startsWith('http') ? articleImage : `${siteOrigin}${articleImage}`;
+
+const jsonLdSchema = score ? {
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  itemReviewed: {
+    '@type': 'Game',
+    name: title
+  },
+  headline: title,
+  description: description,
+  image: fullImageUrl,
+  datePublished: new Date(pubDate).toISOString(),
+  reviewRating: {
+    '@type': 'Rating',
+    ratingValue: score,
+    bestRating: '10',
+    worstRating: '1'
+  },
+  author: {
+    '@type': 'Person',
+    name: authorObj.name
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'VoxelWire',
+    url: siteOrigin,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${siteOrigin}/favicon.png`
+    }
+  }
+} : {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: description,
+  image: fullImageUrl,
+  datePublished: new Date(pubDate).toISOString(),
+  author: {
+    '@type': 'Person',
+    name: authorObj.name
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'VoxelWire',
+    url: siteOrigin,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${siteOrigin}/favicon.png`
+    }
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': articleUrl
+  }
+};
 ---
 
 <Layout 
@@ -67,6 +128,9 @@ const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
   articleDate={pubDate}
   ogType="article"
 >
+  <!-- Schema.org JSON-LD Structured Data Script -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLdSchema)} />
+
   <!-- Fixed 3px Reading Progress Bar -->
   <div class="fixed top-0 left-0 right-0 h-[3px] z-[100] bg-transparent pointer-events-none">
     <div id="reading-progress-bar" class="h-full bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] shadow-[0_0_12px_#8B5CF6] transition-all duration-75 w-0"></div>
