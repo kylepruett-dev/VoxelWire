@@ -1,0 +1,70 @@
+---
+import { getArticlesData } from '../utils/articles';
+import ArticleCard from './ArticleCard.astro';
+
+interface Props {
+  currentSlug: string;
+  category: string;
+  tags?: string[];
+}
+
+const { currentSlug, category, tags = [] } = Astro.props;
+const { all: allArticles } = await getArticlesData();
+
+// Filter out the current article
+const otherArticles = allArticles.filter(a => a.slug !== currentSlug);
+
+// Calculate relevance score based on category match & tag overlaps
+const scoredArticles = otherArticles.map(article => {
+  let score = 0;
+  if (article.category === category) score += 5;
+
+  const currentTagsLower = tags.map(t => t.toLowerCase());
+  const articleTagsLower = (article.tags || []).map(t => t.toLowerCase());
+  const matchingTags = articleTagsLower.filter(t => currentTagsLower.includes(t));
+  score += matchingTags.length * 2;
+
+  return { article, score };
+});
+
+// Sort by score descending, then date descending
+scoredArticles.sort((a, b) => {
+  if (b.score !== a.score) return b.score - a.score;
+  return (b.article.pubDateRaw?.getTime() || 0) - (a.article.pubDateRaw?.getTime() || 0);
+});
+
+// Take top 3 related articles
+let related = scoredArticles.slice(0, 3).map(s => s.article);
+
+// Fallback fill if fewer than 3 related articles found
+if (related.length < 3) {
+  const existingIds = new Set(related.map(a => a.id));
+  const fallback = otherArticles
+    .filter(a => !existingIds.has(a.id))
+    .sort((a, b) => (b.pubDateRaw?.getTime() || 0) - (a.article.pubDateRaw?.getTime() || 0));
+
+  related = [...related, ...fallback.slice(0, 3 - related.length)];
+}
+---
+
+{related.length > 0 && (
+  <section class="mt-14 pt-10 border-t border-slate-800 space-y-6">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="w-3 h-8 bg-[#A855F7] rounded-md shadow-[0_0_12px_#A855F7]"></span>
+        <h3 class="text-2xl font-extrabold text-white font-heading tracking-tight">
+          NEXT ON THE WIRE
+        </h3>
+      </div>
+      <span class="text-xs font-mono uppercase tracking-widest text-[#A855F7] hidden sm:inline-block font-semibold">
+        Recommended Reads
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+      {related.map((article) => (
+        <ArticleCard article={article} />
+      ))}
+    </div>
+  </section>
+)}
