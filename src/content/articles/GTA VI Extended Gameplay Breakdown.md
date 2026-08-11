@@ -1,10 +1,9 @@
 ---
 title: "GTA VI Breakdown: Single-Player Focus, Vice City, and Trailer 3 Expectations"
-pubDate: 2026-08-10
 description: "A deep dive into Rockstar's engine innovations, world density, and what to expect heading into November 19."
-author: "Ethan Clarke"
+pubDate: 2026-08-07T18:00:00Z
 category: "News"
-image: "/images/blog/gta6.jpg"
+heroImage: "/images/gta6-hero.png"
 score: "9.5"
 verdictStatus: "MUST WATCH"
 pros:
@@ -15,6 +14,11 @@ cons:
   - "Current GTA Online service remains separate at launch"
   - "High entry price point ($79.99 MSRP)"
 verdictSummary: "Grand Theft Auto VI is shaping up to be a landmark achievement in open-world gaming. The technical leaps in the RAGE 9 engine and the sheer density of Vice City promise unparalleled detail and immersion."
+tags: ["Rockstar Games", "GTA VI", "PlayStation 5", "Xbox Series X", "Open World"]
+author:
+  name: "Ethan Clarke"
+  avatar: "/images/ethan-clarke.jpg"
+  role: "Editor"
 ---
 
 As we draw closer to the **November 19, 2026** launch of *Grand Theft Auto VI*, excitement across the gaming industry has reached a fever pitch. 

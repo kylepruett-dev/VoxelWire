@@ -1,10 +1,9 @@
 ---
 title: "S.T.A.L.K.E.R. 2: Heart of Chornobyl Review — Returning to the Zone"
-pubDate: 2026-08-10
 description: "With the Cost of Hope DLC dropping this month, we revisit GSC Game World's bleak masterpiece."
-author: "Ethan Clarke"
+pubDate: 2026-08-06T12:00:00Z
 category: "Reviews"
-image: "/images/blog/stalker2.jpg"
+heroImage: "/images/stalker2-hero.png"
 score: "8.5"
 verdictStatus: "GREAT"
 pros:
@@ -17,6 +16,11 @@ cons:
   - "Steep learning curve and unforgiving difficulty may deter casual shooter fans"
   - "Inventory management can feel tedious during long scavenging runs"
 verdictSummary: "S.T.A.L.K.E.R. 2: Heart of Chornobyl is a hauntingly beautiful, uncompromising survival shooter that stays fiercely true to its roots. The expanded faction conflicts and bleak open world deliver an unforgettable atmospheric experience."
+tags: ["GSC Game World", "Survival FPS", "Unreal Engine 5", "Reviews"]
+author:
+  name: "Ethan Clarke"
+  avatar: "/images/ethan-clarke.jpg"
+  role: "Editor"
 ---
 
 The Zone hasn't gotten any friendlier, and that’s precisely why we love it. 
