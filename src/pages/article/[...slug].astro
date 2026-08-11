@@ -30,9 +30,14 @@ const {
   score,
   verdictStatus,
   verdictSummary,
+  verdict,
   pros,
   cons
 } = entry.data;
+
+const finalVerdictSummary = verdictSummary || verdict;
+const scoreNum = parseFloat(score || '0');
+const finalVerdictStatus = verdictStatus || (scoreNum >= 9.0 ? 'MUST PLAY' : scoreNum >= 8.0 ? 'GREAT' : scoreNum >= 7.0 ? 'GOOD' : 'MEDIOCRE');
 
 const articleImage = heroImage || image || 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&auto=format&fit=crop&q=80';
 const authorObj = typeof author === 'string'
@@ -174,8 +179,8 @@ const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
         <!-- Review Verdict Component -->
         <ReviewVerdict 
           score={score} 
-          verdictStatus={verdictStatus} 
-          verdictSummary={verdictSummary} 
+          verdictStatus={finalVerdictStatus} 
+          verdictSummary={finalVerdictSummary} 
           pros={pros} 
           cons={cons} 
         />
