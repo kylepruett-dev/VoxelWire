@@ -6,28 +6,50 @@ interface Props {
   currentSlug: string;
   category: string;
   tags?: string[];
+  title?: string;
 }
 
-const { currentSlug, category, tags = [] } = Astro.props;
+const { currentSlug, category, tags = [], title = '' } = Astro.props;
 const { all: allArticles } = await getArticlesData();
 
 // Filter out the current article
-const otherArticles = allArticles.filter(a => a.slug !== currentSlug);
+const otherArticles = allArticles.filter(a => a.slug !== currentSlug && a.id !== currentSlug);
 
-// Calculate relevance score based on category match & tag overlaps
+// Common stop words to exclude from title keyword matching
+const stopWords = new Set(['the', 'and', 'for', 'with', 'that', 'this', 'from', 'have', 'what', 'game', 'full', 'look', 'best', 'part', 'will']);
+
+// Extract key title terms (>3 letters)
+const currentTitleWords = title
+  .toLowerCase()
+  .replace(/[^a-z0-9\s]/g, '')
+  .split(/\s+/)
+  .filter(w => w.length > 3 && !stopWords.has(w));
+
+// Calculate relevance score based on category match, tag overlaps, and title keywords
 const scoredArticles = otherArticles.map(article => {
   let score = 0;
+
+  // Category match
   if (article.category === category) score += 5;
 
+  // Review matching bonus: If currently reading a review, prioritize other reviews
+  if (category === 'Reviews' && article.category === 'Reviews') score += 4;
+
+  // Tag overlap match
   const currentTagsLower = tags.map(t => t.toLowerCase());
   const articleTagsLower = (article.tags || []).map(t => t.toLowerCase());
   const matchingTags = articleTagsLower.filter(t => currentTagsLower.includes(t));
-  score += matchingTags.length * 2;
+  score += matchingTags.length * 3;
+
+  // Title keyword overlap match
+  const articleTitleLower = article.title.toLowerCase();
+  const matchingTitleWords = currentTitleWords.filter(w => articleTitleLower.includes(w));
+  score += matchingTitleWords.length * 2;
 
   return { article, score };
 });
 
-// Sort by score descending, then date descending
+// Sort by score descending, then publication date descending
 scoredArticles.sort((a, b) => {
   if (b.score !== a.score) return b.score - a.score;
   return (b.article.pubDateRaw?.getTime() || 0) - (a.article.pubDateRaw?.getTime() || 0);
@@ -41,10 +63,12 @@ if (related.length < 3) {
   const existingIds = new Set(related.map(a => a.id));
   const fallback = otherArticles
     .filter(a => !existingIds.has(a.id))
-    .sort((a, b) => (b.pubDateRaw?.getTime() || 0) - (a.article.pubDateRaw?.getTime() || 0));
+    .sort((a, b) => (b.pubDateRaw?.getTime() || 0) - (a.pubDateRaw?.getTime() || 0));
 
   related = [...related, ...fallback.slice(0, 3 - related.length)];
 }
+
+const sectionHeading = category === 'Reviews' ? 'RELATED REVIEWS & COVERAGE' : 'NEXT ON THE WIRE';
 ---
 
 {related.length > 0 && (
@@ -53,11 +77,11 @@ if (related.length < 3) {
       <div class="flex items-center gap-3">
         <span class="w-3 h-8 bg-[#A855F7] rounded-md shadow-[0_0_12px_#A855F7]"></span>
         <h3 class="text-2xl font-extrabold text-white font-heading tracking-tight">
-          NEXT ON THE WIRE
+          {sectionHeading}
         </h3>
       </div>
       <span class="text-xs font-mono uppercase tracking-widest text-[#A855F7] hidden sm:inline-block font-semibold">
-        Recommended Reads
+        Automatically Curated Reads
       </span>
     </div>
 
@@ -68,3 +92,4 @@ if (related.length < 3) {
     </div>
   </section>
 )}
+
