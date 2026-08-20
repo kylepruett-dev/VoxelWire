@@ -4,5 +4,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://voxelwire.net/sitemap.xml
-
+Sitemap: https://voxelwire.net/sitemap-index.xml
