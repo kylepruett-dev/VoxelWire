@@ -6,7 +6,7 @@ import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://voxelwire.vercel.app',
+  site: 'https://voxel-wire.vercel.app',
   integrations: [sitemap()],
 
   vite: {
