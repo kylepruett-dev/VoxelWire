@@ -7,7 +7,7 @@ const articles = defineCollection({
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
-    category: z.enum(['News', 'Reviews', 'Patch Notes', 'Guides']),
+    category: z.enum(['News', 'Reviews', 'Patch Notes', 'Guides', 'Hardware']),
     heroImage: z.string().optional(),
     image: z.string().optional(),
     tags: z.array(z.string()).default([]),
