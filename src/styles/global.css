@@ -61,3 +61,141 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #A855F7;
 }
+
+/* Article Prose Typography & Mobile Spacing */
+.prose h2 {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-top: 2.25rem;
+  margin-bottom: 0.875rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(30, 41, 59, 0.8);
+  letter-spacing: -0.015em;
+}
+
+.prose h2:first-of-type {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .prose h2 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    margin-top: 2.75rem;
+    margin-bottom: 1rem;
+    padding-top: 1.25rem;
+  }
+
+  .prose h2:first-of-type {
+    margin-top: 1.5rem;
+  }
+}
+
+.prose h3 {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  color: #F8FAFC;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .prose h3 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-top: 2.25rem;
+    margin-bottom: 0.875rem;
+  }
+}
+
+.prose p {
+  margin-top: 1.125rem;
+  margin-bottom: 1.125rem;
+  line-height: 1.75;
+  color: #CBD5E1;
+}
+
+@media (min-width: 640px) {
+  .prose p {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+  }
+}
+
+.prose ul, .prose ol {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  padding-left: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .prose ul, .prose ol {
+    padding-left: 1.5rem;
+  }
+}
+
+.prose li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.65;
+  color: #CBD5E1;
+}
+
+.prose ul li {
+  list-style-type: disc;
+}
+
+.prose ol li {
+  list-style-type: decimal;
+}
+
+.prose blockquote {
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid #A855F7;
+  background-color: rgba(15, 23, 42, 0.6);
+  border-top-right-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+  font-style: italic;
+  color: #E2E8F0;
+}
+
+.prose img {
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+  border-radius: 1rem;
+  border: 1px solid #1E293B;
+  width: 100%;
+}
+
+.prose strong {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.prose a {
+  color: #A855F7;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.prose a:hover {
+  color: #C084FC;
+  text-decoration: underline;
+}
+
+.prose hr {
+  margin-top: 2.25rem;
+  margin-bottom: 2.25rem;
+  border-color: #1E293B;
+}
+

@@ -1,0 +1,190 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Contact Us & Press Inquiries — VoxelWire" 
+  description="Get in touch with the editorial team at VoxelWire for reviews, coverage requests, corrections, and business partnerships."
+>
+  <Header />
+
+  <main class="flex-1 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <!-- Header Hero Banner -->
+    <div class="text-center space-y-4 mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/70 text-[#C084FC] border border-[#A855F7]/40 text-xs font-mono font-semibold uppercase tracking-widest shadow-[0_0_12px_rgba(168,85,247,0.25)]">
+        <span class="w-2 h-2 rounded-full bg-[#A855F7] animate-pulse"></span>
+        Get In Touch
+      </div>
+      
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white font-heading tracking-tight leading-tight">
+        Contact VoxelWire
+      </h1>
+
+      <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+        We welcome editorial feedback, review copies, hardware evaluation samples, and press releases.
+      </p>
+    </div>
+
+    <!-- Department Directory Grid -->
+    <div class="mb-16">
+      <div class="mb-6 flex items-center justify-between pb-4 border-b border-slate-800">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-[#A855F7]">Direct Channels</span>
+          <h2 class="text-2xl font-bold text-white font-heading mt-1">Department Directory</h2>
+        </div>
+        <span class="text-xs font-mono bg-slate-900 border border-slate-800 text-slate-400 px-3 py-1 rounded-full hidden sm:inline-block">
+          Response window: 24–48 hrs
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- General Inquiries & Feedback -->
+        <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-6 space-y-4 hover:border-[#A855F7]/50 transition-all duration-300 group">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-950/80 border border-[#A855F7]/40 flex items-center justify-center text-[#A855F7] group-hover:scale-105 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white font-heading">General Inquiries & Feedback</h3>
+              <p class="text-xs text-slate-400">Questions, site feedback, or general reader comments</p>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-slate-800/80">
+            <a 
+              href="mailto:voxelwire@yahoo.com?subject=General%20Inquiry%20-%20VoxelWire" 
+              class="inline-flex items-center gap-2 text-sm font-mono text-[#C084FC] hover:text-white transition-colors"
+            >
+              <span>voxelwire@yahoo.com</span>
+              <svg class="w-3.5 h-3.5 opacity-70 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Review Codes & PR Inquiries -->
+        <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-6 space-y-4 hover:border-[#A855F7]/50 transition-all duration-300 group">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-950/80 border border-[#A855F7]/40 flex items-center justify-center text-[#A855F7] group-hover:scale-105 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white font-heading">Review Codes & PR Inquiries</h3>
+              <p class="text-xs text-slate-400">Game keys, press kits, preview builds, and hardware samples</p>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-slate-800/80">
+            <a 
+              href="mailto:voxelwire@yahoo.com?subject=Review%20Code%20/%20PR%20Inquiry%20-%20VoxelWire" 
+              class="inline-flex items-center gap-2 text-sm font-mono text-[#C084FC] hover:text-white transition-colors"
+            >
+              <span>voxelwire@yahoo.com</span>
+              <svg class="w-3.5 h-3.5 opacity-70 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Corrections & Editorial Desk -->
+        <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-6 space-y-4 hover:border-[#A855F7]/50 transition-all duration-300 group">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-950/80 border border-[#A855F7]/40 flex items-center justify-center text-[#A855F7] group-hover:scale-105 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white font-heading">Corrections & Editorial Desk</h3>
+              <p class="text-xs text-slate-400">Factual updates, typos, source attributions, or editorial notices</p>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-slate-800/80">
+            <a 
+              href="mailto:voxelwire@yahoo.com?subject=Editorial%20Correction%20-%20VoxelWire" 
+              class="inline-flex items-center gap-2 text-sm font-mono text-[#C084FC] hover:text-white transition-colors"
+            >
+              <span>voxelwire@yahoo.com</span>
+              <svg class="w-3.5 h-3.5 opacity-70 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Advertising & Partnerships -->
+        <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-6 space-y-4 hover:border-[#A855F7]/50 transition-all duration-300 group">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-950/80 border border-[#A855F7]/40 flex items-center justify-center text-[#A855F7] group-hover:scale-105 transition-transform">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white font-heading">Advertising & Partnerships</h3>
+              <p class="text-xs text-slate-400">Media kits, display ad slots, sponsored hub opportunities</p>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-slate-800/80">
+            <a 
+              href="mailto:voxelwire@yahoo.com?subject=Advertising%20%26%20Partnerships%20-%20VoxelWire" 
+              class="inline-flex items-center gap-2 text-sm font-mono text-[#C084FC] hover:text-white transition-colors"
+            >
+              <span>voxelwire@yahoo.com</span>
+              <svg class="w-3.5 h-3.5 opacity-70 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review Copy & Coverage Policy -->
+    <div class="bg-slate-900/40 rounded-3xl border border-slate-800 p-6 sm:p-8 mb-12 space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-purple-950/80 border border-[#A855F7]/40 flex items-center justify-center text-[#A855F7] shrink-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold text-white font-heading">Review Copy & Evaluation Policy</h2>
+      </div>
+
+      <div class="space-y-3 text-slate-300 text-sm leading-relaxed pl-0 sm:pl-12">
+        <p>
+          Publishers, game studios, and independent developers are invited to submit digital evaluation codes, press releases, and hardware review samples directly to <a href="mailto:voxelwire@yahoo.com" class="text-[#A855F7] font-mono hover:underline">voxelwire@yahoo.com</a>.
+        </p>
+        <p class="text-slate-400">
+          <strong class="text-slate-200">Editorial Independence Disclaimer:</strong> Providing review codes, embargo access, or physical samples does not guarantee coverage or a positive review score. All published reviews, previews, and technical analyses strictly follow VoxelWire’s independent <a href="/editorial-guidelines" class="text-[#A855F7] hover:underline font-semibold">Editorial Guidelines</a> and code of ethics.
+        </p>
+      </div>
+    </div>
+
+    <!-- Response Time Note Card -->
+    <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3 text-slate-300 text-sm">
+        <svg class="w-5 h-5 text-[#A855F7] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span>
+          <strong class="text-white">Response Time Commitment:</strong> Our editorial desk strives to respond to all genuine business and press inquiries within <strong>24–48 business hours</strong>.
+        </span>
+      </div>
+      <a 
+        href="mailto:voxelwire@yahoo.com" 
+        class="bg-[#A855F7] hover:bg-[#9333EA] text-white text-xs font-bold uppercase tracking-wider py-2.5 px-6 rounded-full transition-all duration-200 shadow-[0_0_15px_rgba(168,85,247,0.3)] hover:scale-105 shrink-0"
+      >
+        Send Email
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

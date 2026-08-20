@@ -28,33 +28,33 @@ if (!verdictStatus && score) {
 ---
 
 {(score || pros.length > 0 || cons.length > 0 || verdictSummary) && (
-  <section class="mt-12 pt-8 border-t border-slate-800">
-    <div class="relative bg-[#0B0E14] border border-slate-800/90 border-t-2 border-t-[#A855F7] rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6 overflow-hidden">
+  <section class="mt-10 sm:mt-14 pt-6 sm:pt-8 border-t border-slate-800">
+    <div class="relative bg-[#0B0E14] border border-slate-800/90 border-t-2 border-t-[#A855F7] rounded-2xl p-5 sm:p-8 shadow-2xl space-y-6 overflow-hidden">
       <!-- Background Ambient Purple Glow -->
       <div class="absolute -top-16 -right-16 w-40 h-40 bg-[#A855F7]/15 rounded-full blur-3xl pointer-events-none"></div>
 
       <!-- Verdict Header & Score Badge -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-slate-800/80">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 pb-5 sm:pb-6 border-b border-slate-800/80">
         <div class="space-y-1">
           <div class="flex items-center gap-2">
             <span class="w-2.5 h-2.5 rounded-full bg-[#A855F7] shadow-[0_0_10px_#A855F7]"></span>
             <span class="text-xs font-mono uppercase tracking-widest text-[#A855F7] font-bold">VoxelWire Score & Verdict</span>
           </div>
-          <h3 class="text-2xl font-extrabold text-white font-heading tracking-tight">
+          <h3 class="text-xl sm:text-2xl font-extrabold text-white font-heading tracking-tight">
             Final Verdict
           </h3>
         </div>
 
         {score && (
-          <div class="flex items-center gap-4 bg-slate-900/80 p-3 sm:px-5 sm:py-3 rounded-2xl border border-slate-800/90 shadow-inner">
+          <div class="flex items-center justify-between sm:justify-start gap-4 bg-slate-900/80 p-3.5 sm:px-5 sm:py-3 rounded-2xl border border-slate-800/90 shadow-inner w-full sm:w-auto">
             <div class="text-center">
-              <span class="block text-xs font-mono text-slate-400 uppercase tracking-wider">Rating</span>
+              <span class="block text-[10px] sm:text-xs font-mono text-slate-400 uppercase tracking-wider">Rating</span>
               <span class="text-xs font-extrabold uppercase px-2.5 py-0.5 rounded-md bg-[#A855F7]/10 text-[#C084FC] border border-[#A855F7]/40 shadow-[0_0_12px_rgba(168,85,247,0.2)]">
                 {statusText}
               </span>
             </div>
 
-            <div class="h-10 w-px bg-slate-800"></div>
+            <div class="h-9 w-px bg-slate-800"></div>
 
             <div class="flex items-baseline gap-1">
               <span class="text-3xl sm:text-4xl font-black text-white font-mono drop-shadow-[0_0_15px_rgba(168,85,247,0.4)]">
@@ -68,12 +68,12 @@ if (!verdictStatus && score) {
 
       <!-- Pros & Cons Grid -->
       {(pros.length > 0 || cons.length > 0) && (
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           
           <!-- Pros Column -->
           {pros.length > 0 && (
-            <div class="bg-emerald-950/20 border border-emerald-500/20 rounded-xl p-5 space-y-3.5 shadow-sm">
-              <div class="flex items-center gap-2 text-emerald-400 font-extrabold font-heading text-sm uppercase tracking-wider">
+            <div class="bg-emerald-950/20 border border-emerald-500/20 rounded-xl p-4 sm:p-5 space-y-3 shadow-sm">
+              <div class="flex items-center gap-2 text-emerald-400 font-extrabold font-heading text-xs sm:text-sm uppercase tracking-wider">
                 <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
                 </svg>
@@ -81,9 +81,9 @@ if (!verdictStatus && score) {
               </div>
               <ul class="space-y-2.5 text-xs sm:text-sm text-slate-200">
                 {pros.map((item) => (
-                  <li class="flex items-start gap-2.5">
+                  <li class="flex items-start gap-2.5 leading-relaxed">
                     <span class="text-emerald-400 font-bold shrink-0 mt-0.5">✓</span>
-                    <span class="leading-relaxed">{item}</span>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -92,8 +92,8 @@ if (!verdictStatus && score) {
 
           <!-- Cons Column -->
           {cons.length > 0 && (
-            <div class="bg-rose-950/20 border border-rose-500/20 rounded-xl p-5 space-y-3.5 shadow-sm">
-              <div class="flex items-center gap-2 text-rose-400 font-extrabold font-heading text-sm uppercase tracking-wider">
+            <div class="bg-rose-950/20 border border-rose-500/20 rounded-xl p-4 sm:p-5 space-y-3 shadow-sm">
+              <div class="flex items-center gap-2 text-rose-400 font-extrabold font-heading text-xs sm:text-sm uppercase tracking-wider">
                 <svg class="w-4 h-4 text-rose-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20 12H4"></path>
                 </svg>
@@ -101,9 +101,9 @@ if (!verdictStatus && score) {
               </div>
               <ul class="space-y-2.5 text-xs sm:text-sm text-slate-200">
                 {cons.map((item) => (
-                  <li class="flex items-start gap-2.5">
+                  <li class="flex items-start gap-2.5 leading-relaxed">
                     <span class="text-rose-400 font-bold shrink-0 mt-0.5">✕</span>
-                    <span class="leading-relaxed">{item}</span>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
