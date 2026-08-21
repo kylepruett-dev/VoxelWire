@@ -14,16 +14,16 @@ interface Props {
 const { 
   title = "VoxelWire — Next-Gen Gaming & Hardware News",
   description = "Stay updated with the latest gaming news, hardware reviews, deep-dive benchmarks, and patch notes on VoxelWire.",
-  image = "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&auto=format&fit=crop&q=80",
+  image = "/images/voxelwire-og-banner.png",
   articleDate,
   ogType = articleDate ? 'article' : 'website'
 } = Astro.props;
 
-const origin = Astro.site?.origin || Astro.url.origin || 'https://voxelwire.vercel.app';
-const canonicalURL = new URL(Astro.url.pathname, origin).href;
+const siteOrigin = Astro.site?.origin || 'https://voxelwire.net';
+const canonicalURL = new URL(Astro.url.pathname, siteOrigin).href;
 const imageURL = image.startsWith('http://') || image.startsWith('https://') 
   ? image 
-  : new URL(image, origin).href;
+  : new URL(image, siteOrigin).href;
 ---
 
 <!DOCTYPE html>
