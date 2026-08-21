@@ -2,7 +2,7 @@
 title: "Mortal Shell 2: Best PC Graphics Settings for Maximum FPS, Stutter Fixes & DLSS/FSR Guide"
 description: "Maximize your frame rate and eliminate shader compilation stutter in Mortal Shell 2. Here are the best PC graphics settings, DLSS/FSR configurations, and performance tweaks."
 pubDate: 2026-08-21T00:00:00Z
-author: "VoxelWire Editorial Team"
+author: "Ethan Clarke"
 category: "Guides"
 tags: ["Mortal Shell 2", "PC Gaming", "Tech Guides", "Optimization", "Graphics Settings", "DLSS"]
 heroImage: "/images/mortal-shell-2-settings-guide.webp"

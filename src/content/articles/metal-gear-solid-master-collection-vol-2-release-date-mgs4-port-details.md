@@ -2,7 +2,7 @@
 title: "Metal Gear Solid: Master Collection Vol. 2 – Release Date, MGS4 Port Details, Platforms & Performance Targets"
 description: "Everything you need to know about Metal Gear Solid: Master Collection Vol. 2, including the long-awaited MGS4 multiplatform port, Peace Walker, preload dates, and resolution targets."
 pubDate: 2026-08-21T00:00:00Z
-author: "VoxelWire Editorial Team"
+author: "Ethan Clarke"
 category: "Guides"
 tags: ["Metal Gear Solid", "PS5", "Xbox Series X", "PC Gaming", "Nintendo Switch 2", "Gaming News"]
 heroImage: "/images/mgs-vol-2-guide.webp"

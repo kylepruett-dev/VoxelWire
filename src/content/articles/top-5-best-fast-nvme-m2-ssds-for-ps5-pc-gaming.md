@@ -2,7 +2,7 @@
 title: "Top 5 Best Fast NVMe M.2 SSDs for PS5 & PC Gaming (Under $100 in 2026)"
 description: "Expand your storage without breaking the bank. Here are the fastest, most reliable Gen4 and Gen5 M.2 NVMe SSDs for PlayStation 5 and PC gaming under $100."
 pubDate: 2026-08-21T00:00:00Z
-author: "VoxelWire Editorial Team"
+author: "Ethan Clarke"
 category: "Hardware"
 tags: ["Hardware", "PS5", "PC Gaming", "SSD", "Tech Guides", "Storage"]
 heroImage: "/images/best-budget-nvme-ssds.webp"

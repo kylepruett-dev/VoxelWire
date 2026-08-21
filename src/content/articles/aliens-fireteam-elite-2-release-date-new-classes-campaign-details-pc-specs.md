@@ -2,7 +2,7 @@
 title: "Aliens: Fireteam Elite 2 – Release Date, New Classes, Campaign Details, Crossplay & PC Specs"
 description: "Everything you need to know about Aliens: Fireteam Elite 2, including the August 25 release date, new Marine classes, expanded Xenomorph variants, crossplay support, and system requirements."
 pubDate: 2026-08-21T00:00:00Z
-author: "VoxelWire Editorial Team"
+author: "Ethan Clarke"
 category: "Guides"
 tags: ["Aliens Fireteam Elite 2", "Co-Op", "PS5", "Xbox Series X", "PC Gaming", "Gaming News"]
 heroImage: "/images/aliens-fireteam-elite-2-guide.webp"

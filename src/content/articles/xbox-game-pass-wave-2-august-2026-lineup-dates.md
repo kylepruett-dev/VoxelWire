@@ -8,10 +8,7 @@ image: "/images/xbox-game-pass-august-2026-hero.jpg"
 featured: true
 readTime: "6 min read"
 tags: ["Xbox Game Pass", "Xbox Series X", "PC Game Pass", "Resonance A Plague Tale Legacy", "Microsoft"]
-author:
-  name: "VoxelWire Editorial"
-  avatar: "/favicon.svg"
-  role: "Editorial Team"
+author: "Ethan Clarke"
 ---
 
 Microsoft has revealed the official **Xbox Game Pass Wave 2 lineup for late August 2026**, adding high-profile Day One blockbusters, dark action RPGs, and indie standouts across Xbox Series X|S, PC, and Xbox Cloud Gaming.

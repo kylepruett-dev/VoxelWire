@@ -2,7 +2,7 @@
 title: "Mafia: The Old Country – Man of Honor Review: A Ruthless, Cinematic Sicilian Masterpiece"
 description: "Hangar 13 strips away open-world bloat to deliver an intense, grounded 1900s Sicilian crime epic. Here is our full review of Mafia: The Old Country – Man of Honor on PC and PS5."
 pubDate: 2026-08-21T00:00:00Z
-author: "VoxelWire Editorial Team"
+author: "Ethan Clarke"
 category: "Reviews"
 tags: ["Mafia", "Man of Honor", "Reviews", "PC Gaming", "PS5", "Xbox Series X", "Action Adventure"]
 heroImage: "/images/mafia-man-of-honor-review.webp"

@@ -3,13 +3,14 @@ import type { Article } from '../data/articles';
 
 export function formatCollectionEntry(entry: CollectionEntry<'articles'>): Article {
   const { data, id } = entry;
-  const authorObj = typeof data.author === 'string'
-    ? { name: data.author, avatar: '/images/ethan-clarke.jpg', role: 'Editor' }
-    : {
-        name: data.author?.name || 'Ethan Clarke',
-        avatar: data.author?.avatar || '/images/ethan-clarke.jpg',
-        role: data.author?.role || 'Editor'
-      };
+  const rawAuthorName = typeof data.author === 'string' ? data.author : data.author?.name;
+  const isGenericEditorial = !rawAuthorName || rawAuthorName.includes('VoxelWire');
+
+  const authorObj = {
+    name: isGenericEditorial ? 'Ethan Clarke' : rawAuthorName,
+    avatar: (isGenericEditorial ? '/images/ethan-clarke.jpg' : (typeof data.author === 'object' ? data.author?.avatar : null)) || '/images/ethan-clarke.jpg',
+    role: (typeof data.author === 'object' ? data.author?.role : null) || 'Editor'
+  };
 
   return {
     id: id,
@@ -57,18 +58,22 @@ export async function getArticlesData() {
     featured: newestFeatured,
     latest,
     grid: trendingGrid,
-    all: allArticles
+    all: sortedByDate
   };
 }
 
 export async function getNewsArticles() {
   const { all } = await getArticlesData();
-  // Everything that isn't a review
-  return all.filter(article => article.category !== 'Reviews');
+  // Everything that isn't a review, sorted by pubDate (newest first)
+  return all
+    .filter(article => article.category !== 'Reviews')
+    .sort((a, b) => (b.pubDateRaw?.getTime() || 0) - (a.pubDateRaw?.getTime() || 0));
 }
 
 export async function getReviewArticles() {
   const { all } = await getArticlesData();
-  // Only reviews
-  return all.filter(article => article.category === 'Reviews');
+  // Only reviews, sorted by pubDate (newest first)
+  return all
+    .filter(article => article.category === 'Reviews')
+    .sort((a, b) => (b.pubDateRaw?.getTime() || 0) - (a.pubDateRaw?.getTime() || 0));
 }

@@ -40,9 +40,13 @@ const scoreNum = parseFloat(score || '0');
 const finalVerdictStatus = verdictStatus || (scoreNum >= 9.0 ? 'MUST PLAY' : scoreNum >= 8.0 ? 'GREAT' : scoreNum >= 7.0 ? 'GOOD' : 'MEDIOCRE');
 
 const articleImage = heroImage || image || 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&auto=format&fit=crop&q=80';
-const authorObj = typeof author === 'string'
-  ? { name: author, avatar: '/images/ethan-clarke.jpg', role: 'Editor' }
-  : { name: author?.name || 'Ethan Clarke', avatar: author?.avatar || '/images/ethan-clarke.jpg', role: author?.role || 'Editor' };
+const rawAuthorName = typeof author === 'string' ? author : author?.name;
+const isGenericEditorial = !rawAuthorName || rawAuthorName.includes('VoxelWire');
+const authorObj = {
+  name: isGenericEditorial ? 'Ethan Clarke' : rawAuthorName,
+  avatar: (isGenericEditorial ? '/images/ethan-clarke.jpg' : (typeof author === 'object' ? author?.avatar : null)) || '/images/ethan-clarke.jpg',
+  role: (typeof author === 'object' ? author?.role : null) || 'Senior Gaming & Hardware Editor'
+};
 
 const formattedDate = new Date(pubDate).toLocaleDateString('en-US', {
   month: 'long',

@@ -2,7 +2,7 @@
 title: "Star Wars: Zero Company – Release Date, Squad Mechanics, Platforms, Story Setting & PC Specs"
 description: "Everything you need to know about Star Wars: Zero Company, including the August 27 release date, turn-based squad combat systems, Galactic Civil War setting, and PC system requirements."
 pubDate: 2026-08-21T00:00:00Z
-author: "VoxelWire Editorial Team"
+author: "Ethan Clarke"
 category: "Guides"
 tags: ["Star Wars", "Zero Company", "PC Gaming", "PS5", "Xbox Series X", "Tactical RPG", "Gaming News"]
 heroImage: "/images/star-wars-zero-company-guide.webp"
