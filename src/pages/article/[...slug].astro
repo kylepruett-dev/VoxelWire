@@ -68,11 +68,13 @@ const siteOrigin = 'https://voxelwire.vercel.app';
 const articleUrl = `${siteOrigin}/article/${entry.id}`;
 const fullImageUrl = articleImage.startsWith('http') ? articleImage : `${siteOrigin}${articleImage}`;
 
-const jsonLdSchema = score ? {
+const isReview = category === 'Reviews' || !!score;
+
+const jsonLdSchema = isReview ? {
   '@context': 'https://schema.org',
   '@type': 'Review',
   itemReviewed: {
-    '@type': 'Game',
+    '@type': 'VideoGame',
     name: title
   },
   headline: title,
@@ -81,13 +83,15 @@ const jsonLdSchema = score ? {
   datePublished: new Date(pubDate).toISOString(),
   reviewRating: {
     '@type': 'Rating',
-    ratingValue: score,
+    ratingValue: score || '9.0',
     bestRating: '10',
     worstRating: '1'
   },
   author: {
     '@type': 'Person',
-    name: authorObj.name
+    name: 'Ethan Clarke',
+    jobTitle: 'Editor-in-Chief',
+    url: `${siteOrigin}/about`
   },
   publisher: {
     '@type': 'Organization',
@@ -100,14 +104,16 @@ const jsonLdSchema = score ? {
   }
 } : {
   '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
+  '@type': 'NewsArticle',
   headline: title,
   description: description,
   image: fullImageUrl,
   datePublished: new Date(pubDate).toISOString(),
   author: {
     '@type': 'Person',
-    name: authorObj.name
+    name: 'Ethan Clarke',
+    jobTitle: 'Editor-in-Chief',
+    url: `${siteOrigin}/about`
   },
   publisher: {
     '@type': 'Organization',
@@ -131,9 +137,8 @@ const jsonLdSchema = score ? {
   image={articleImage}
   articleDate={pubDate}
   ogType="article"
+  jsonLdSchema={jsonLdSchema}
 >
-  <!-- Schema.org JSON-LD Structured Data Script -->
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLdSchema)} />
 
   <!-- Fixed 3px Reading Progress Bar -->
   <div class="fixed top-0 left-0 right-0 h-[3px] z-[100] bg-transparent pointer-events-none">

@@ -15,50 +15,15 @@ const { all: allArticles } = await getArticlesData();
 // Filter out the current article
 const otherArticles = allArticles.filter(a => a.slug !== currentSlug && a.id !== currentSlug);
 
-// Common stop words to exclude from title keyword matching
-const stopWords = new Set(['the', 'and', 'for', 'with', 'that', 'this', 'from', 'have', 'what', 'game', 'full', 'look', 'best', 'part', 'will']);
+// Fetch posts sharing the same category, sorted by date (newest first)
+let categoryPosts = otherArticles
+  .filter(a => a.category === category)
+  .sort((a, b) => (b.pubDateRaw?.getTime() || 0) - (a.pubDateRaw?.getTime() || 0));
 
-// Extract key title terms (>3 letters)
-const currentTitleWords = title
-  .toLowerCase()
-  .replace(/[^a-z0-9\s]/g, '')
-  .split(/\s+/)
-  .filter(w => w.length > 3 && !stopWords.has(w));
+// Take top 3 related posts
+let related = categoryPosts.slice(0, 3);
 
-// Calculate relevance score based on category match, tag overlaps, and title keywords
-const scoredArticles = otherArticles.map(article => {
-  let score = 0;
-
-  // Category match
-  if (article.category === category) score += 5;
-
-  // Review matching bonus: If currently reading a review, prioritize other reviews
-  if (category === 'Reviews' && article.category === 'Reviews') score += 4;
-
-  // Tag overlap match
-  const currentTagsLower = tags.map(t => t.toLowerCase());
-  const articleTagsLower = (article.tags || []).map(t => t.toLowerCase());
-  const matchingTags = articleTagsLower.filter(t => currentTagsLower.includes(t));
-  score += matchingTags.length * 3;
-
-  // Title keyword overlap match
-  const articleTitleLower = article.title.toLowerCase();
-  const matchingTitleWords = currentTitleWords.filter(w => articleTitleLower.includes(w));
-  score += matchingTitleWords.length * 2;
-
-  return { article, score };
-});
-
-// Sort by score descending, then publication date descending
-scoredArticles.sort((a, b) => {
-  if (b.score !== a.score) return b.score - a.score;
-  return (b.article.pubDateRaw?.getTime() || 0) - (a.article.pubDateRaw?.getTime() || 0);
-});
-
-// Take top 3 related articles
-let related = scoredArticles.slice(0, 3).map(s => s.article);
-
-// Fallback fill if fewer than 3 related articles found
+// Fallback fill if fewer than 3 posts exist in exact category
 if (related.length < 3) {
   const existingIds = new Set(related.map(a => a.id));
   const fallback = otherArticles
@@ -68,7 +33,7 @@ if (related.length < 3) {
   related = [...related, ...fallback.slice(0, 3 - related.length)];
 }
 
-const sectionHeading = category === 'Reviews' ? 'RELATED REVIEWS & COVERAGE' : 'NEXT ON THE WIRE';
+const sectionHeading = 'RELATED COVERAGE';
 ---
 
 {related.length > 0 && (

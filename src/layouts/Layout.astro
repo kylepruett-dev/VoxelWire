@@ -9,6 +9,7 @@ interface Props {
   image?: string;
   articleDate?: string | Date;
   ogType?: 'website' | 'article';
+  jsonLdSchema?: Record<string, any>;
 }
 
 const { 
@@ -16,7 +17,8 @@ const {
   description = "Stay updated with the latest gaming news, hardware reviews, deep-dive benchmarks, and patch notes on VoxelWire.",
   image = "/images/voxelwire-og-banner.png",
   articleDate,
-  ogType = articleDate ? 'article' : 'website'
+  ogType = articleDate ? 'article' : 'website',
+  jsonLdSchema
 } = Astro.props;
 
 const siteOrigin = Astro.site?.origin || 'https://voxelwire.net';
@@ -77,6 +79,11 @@ const imageURL = image.startsWith('http://') || image.startsWith('https://')
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageURL} />
+
+    <!-- JSON-LD Structured Data -->
+    {jsonLdSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLdSchema)} />
+    )}
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
