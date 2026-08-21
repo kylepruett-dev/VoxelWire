@@ -8,10 +8,7 @@ image: "/images/xbox-game-pass-august-2026-wave2-header.jpg"
 featured: true
 readTime: "5 min read"
 tags: ["Xbox Game Pass", "Xbox", "News", "Plague Tale", "PC Game Pass", "Gamescom 2026"]
-author:
-  name: "VoxelWire Editorial"
-  avatar: "/favicon.svg"
-  role: "Editorial Team"
+author: "Ethan Clarke"
 ---
 
 Microsoft has officially revealed the second wave of titles joining the Xbox Game Pass catalog for late August through September 1, 2026. This mid-month drop brings 10 additional games spanning day-one indie breakouts, action roguelites, and the highly anticipated day-one release of *Resonance: A Plague Tale Legacy*.
